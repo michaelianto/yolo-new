@@ -8,7 +8,7 @@ st.write("""
 # Object Detection with YOLO v3
 """)
 
-image = st.file_uploader('Image for Object Detection', type=['jpg', 'png'])
+image = st.file_uploader('Image for Object Detection', type=['jpg', 'jpeg', 'png'])
 
 if image is not None:
   st.image(image)
@@ -26,6 +26,7 @@ if image is not None:
   output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
 
   image = np.uint8(image)
+  image = cv2.cvtColor(image, cv2.COLOR_RGBA2RGB)
   image = cv2.resize(image, None, fx=1.0, fy=1.0)
   height, width, channels = image.shape
 
